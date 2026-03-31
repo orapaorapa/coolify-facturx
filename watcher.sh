@@ -28,7 +28,7 @@ while true; do
         --source-xml "${base}.xml" \
         --out "facturx_${base}.pdf" \
         --format fx \
-        --version 2 \
+        --version 1 \
         --profile EN16931 \
         --no-additional-attachments
 
