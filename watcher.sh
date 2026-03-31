@@ -27,7 +27,7 @@ while true; do
         --out "facturx_${base}.pdf" \
       && echo "OK : facturx_${base}.pdf cree" \
       || echo "ECHEC : ${base}"
-      
+
       found_any=1
     fi
   done
