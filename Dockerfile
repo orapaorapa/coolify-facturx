@@ -9,6 +9,6 @@ RUN curl -fL -o /opt/mustang/Mustang-CLI.jar https://www.mustangproject.org/depl
 WORKDIR /data
 
 COPY watcher.sh /watcher.sh
-RUN chmod +x /watcher.sh
+RUN sed -i 's/\r$//' /watcher.sh && chmod +x /watcher.sh
 
 ENTRYPOINT ["/bin/sh", "/watcher.sh"]
