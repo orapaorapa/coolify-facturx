@@ -20,15 +20,19 @@ while true; do
     if [ -f "${base}.xml" ] && [ ! -f "facturx_${base}.pdf" ]; then
       echo "Conversion de ${base}"
 
-      if java -Xmx1G -Dfile.encoding=UTF-8 -jar /opt/mustang/Mustang-CLI.jar \
+      rm -f "facturx_${base}.pdf"
+
+      java -Xmx1G -Dfile.encoding=UTF-8 -jar /opt/mustang/Mustang-CLI.jar \
         --action combine \
         --source "${f}" \
         --source-xml "${base}.xml" \
         --out "facturx_${base}.pdf" \
         --format fx \
         --version 2 \
-        --profile EN16931
-      then
+        --profile EN16931 \
+        --no-additional-attachments
+
+      if [ -f "facturx_${base}.pdf" ]; then
         echo "OK : facturx_${base}.pdf cree"
       else
         echo "ECHEC : ${base}"
