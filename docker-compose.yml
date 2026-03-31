@@ -7,5 +7,5 @@ services:
       dockerfile: Dockerfile
     container_name: facturx
     volumes:
-      - /data/factures:/data
+      - /home/wegelin/facturx:/data
     restart: unless-stopped
