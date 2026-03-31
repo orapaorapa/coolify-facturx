@@ -11,4 +11,4 @@ WORKDIR /data
 COPY watcher.sh /watcher.sh
 RUN chmod +x /watcher.sh
 
-ENTRYPOINT ["/watcher.sh"]
+ENTRYPOINT ["/bin/sh", "/watcher.sh"]
