@@ -8,10 +8,10 @@ cd /data
 while true; do
   found_any=0
 
-  for f in *.pdf; do
+  for f in *.pdf *.PDF; do
     [ -e "$f" ] || continue
 
-    base="${f%.pdf}"
+    base=$(echo "$f" | sed 's/\.[pP][dD][fF]$//')
 
     case "$f" in
       facturx_*) continue ;;
@@ -20,13 +20,19 @@ while true; do
     if [ -f "${base}.xml" ] && [ ! -f "facturx_${base}.pdf" ]; then
       echo "Conversion de ${base}"
 
-      java -Xmx1G -Dfile.encoding=UTF-8 -jar /opt/mustang/Mustang-CLI.jar \
+      if java -Xmx1G -Dfile.encoding=UTF-8 -jar /opt/mustang/Mustang-CLI.jar \
         --action combine \
-        --source "${base}.pdf" \
-        --xml "${base}.xml" \
+        --source "${f}" \
+        --source-xml "${base}.xml" \
         --out "facturx_${base}.pdf" \
-      && echo "OK : facturx_${base}.pdf cree" \
-      || echo "ECHEC : ${base}"
+        --format fx \
+        --version 2 \
+        --profile EN16931
+      then
+        echo "OK : facturx_${base}.pdf cree"
+      else
+        echo "ECHEC : ${base}"
+      fi
 
       found_any=1
     fi
