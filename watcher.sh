@@ -29,7 +29,7 @@ while true; do
         --out "facturx_${base}.pdf" \
         --format fx \
         --version 1 \
-        --profile EN16931 \
+        --profile E \
         --no-additional-attachments
 
       if [ -f "facturx_${base}.pdf" ]; then
